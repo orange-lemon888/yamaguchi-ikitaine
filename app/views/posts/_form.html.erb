@@ -40,11 +40,13 @@
     <%= form.label :image %>
     <%= form.file_field :image %>
   </div>
-
+  
+  <%# ---後で削除-- -----
   <div class="field">
-    <%= form.label :user_id %>
+    <%= form.label :user %>
+  <%# ---後で削除-- -----
     <%= form.text_field :user_id %>
-  </div>
+  <%#</div> ------%>
 
   <div class="actions">
     <%= form.submit %>

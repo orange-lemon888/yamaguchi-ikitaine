@@ -1,41 +1,8 @@
-<div class="container center-block">
-  <%# public %>
-  <%= image_tag "/IMG_0003.JPG", alt: "sesshutei", id: "public", class: "image", width: "1200px", height: "630px" %>
+<div class="jumbotron" style="background:url(/IMG_0003.JPG); background-size:cover;">
+  <div class="container-fluid">
+    <h1 style="color: #ffffff;">やまぐちの行きたいねを見つけよう!!</h1>
+    <p class="text-white">サブタイトル</p>
+  </div>
 </div>
 
 <%= render 'posts', posts: @posts %>
-<table>
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Title</th>
-      <th>Subtitle</th>
-      <th>Area</th>
-      <th>Content</th>
-      <th>Image</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.category %></td>
-        <td><%= post.title %></td>
-        <td><%= post.subtitle %></td>
-        <td><%= post.area %></td>
-        <td><%= post.content %></td>
-        <td><%= post.image %></td>
-        <td><%= post.user %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%#= link_to '新規投稿', new_post_path --------（後で）ログインしていたらナビで表示できるように　12/21%>
