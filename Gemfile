@@ -27,8 +27,8 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+# Use ActiveStorage variant ---------------12/24#を外す
+gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -66,3 +66,6 @@ gem 'kaminari'
 
 #アップローダの実装用
 gem 'carrierwave'
+
+#デバッグ用
+gem 'pry-byebug', group: :development

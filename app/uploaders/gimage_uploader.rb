@@ -1,7 +1,8 @@
 class GimageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
-  # include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  #--------12/23追加---------
+  #include CarrierWave::RMagick
+  include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
   storage :file
@@ -23,15 +24,44 @@ class GimageUploader < CarrierWave::Uploader::Base
 
   # Process files as they are uploaded:
   # process scale: [200, 300]
+  
+  #上限変更--------12/23追加--------------------
+  process :resize_to_limit => [700,700]
+  process :convert => 'jpg'
+  
+  #サムネイルを生成
+  version :thumb do
+    process :resize_to_limit => [300, 300]
+  end
+
+# jpg,jpeg,gif,pngのみ
+  def extension_white_list
+    %w(jpg jpeg gif png)
+  end
+
+#ファイル名を変更し拡張子を同じにする
+  def filename
+    super.chomp(File.extname(super)) + '.jpg' 
+  end
+
+#日付で保存
+  def filename
+    if original_filename.present?
+      time = Time.now
+      name = time.strftime('%Y%m%d%H%M%S') + '.jpg'
+      name.downcase
+    end
+  end
+  #----------------------ここまで-------------------
   #
   # def scale(width, height)
   #   # do something
   # end
 
-  # Create different versions of your uploaded files:
-  # version :thumb do
-  #   process resize_to_fit: [50, 50]
-  # end
+   #Create different versions of your uploaded files:
+   #version :thumb do
+     process resize_to_fit: [250, 250]
+   #end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

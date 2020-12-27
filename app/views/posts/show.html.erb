@@ -1,39 +1,34 @@
-<%#<p id="notice"><%= notice %><%# </p>%>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
 
-<p>
-  <strong>Category:</strong>
-  <%= @post.category %>
-</p>
+      <p><%= @post.title %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
+      <% if @post.image? %>
+        <%= image_tag @post.image.url,  size: '480x320' %>
+      <% end %>
 
-<p>
-  <strong>Subtitle:</strong>
-  <%= @post.subtitle %>
-</p>
-
-<p>
-  <strong>Area:</strong>
-  <%= @post.area %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @post.content %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @post.image.url if @post.image? %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @post.user %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+      <P>
+        <span class="badge badge-warning">投稿者</span><%= @post.user.name %> 
+        <span class="badge badge-warning">ｴﾘｱ</span><%= @post.area %> 
+        <span class="badge badge-warning">投稿日</span><%= @post.created_at %>
+      </P>
+　　
+      <p><span class="badge badge-warning">ポイント</span><%= @post.subtitle %></p>
+    </div>
+    
+    <div class="col-md-6">
+      <div class="col-md-6">💛行きたいね　件
+      
+        <% if logged_in? %>
+          <% if current_user == @post.user %>
+            <%= link_to '編集', edit_post_path(@post) %>
+            <%= link_to '削除', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        <% end %>
+      </div>
+      <span class="badge badge-success">投稿内容</span>
+      <p><%= @post.content %></p>
+    </div>
+  </div>
+</div>

@@ -1,36 +1,24 @@
+<%# ログインしていなくても投稿一覧表示可 %>
 <% if posts.any? %>
   <ul class="list-unstyled">
-    <% posts.each do |post| %>
+    <% Post.where(category: category[0]).each do |post| %>
       <li class="media mb-3">
-        
         <div class="media-body">
-          <%= post.category %>
           <div>
-            <%= link_to post.title, post_path(post) %> 
+            <%= link_to post.title, post_path(post) %> <span class="text-muted"><%= post.area %><%= post.created_at %><%= '💛行きたいね' %><%= '件' %></span>
           </div>
-          <div>
-            <%#= post.image %>
-            <img src="post.image" class="img-rounded img-responsive" >
-            <%#= image_tag "post.image" %>
-          </div>
-          
-          <span class="text-muted"><%= post.area %><%= post.created_at %></span>
-          <div>
-            <%= post.subtitle %>
-            <%#= post.user %>
-          </div>
-          
-          <div>
-            <%= '💛行きたいね' %>
-          </div>
-          <div>
-            <%= post.content %>
-          </div>
+        <%#-----画像を入れる -----%>
+          <% if post.image? %>
+            <%= image_tag post.image.url, width: "250px" %>
+          <% end %>
+          <%#= post.user %>      
+          <div><%= post.subtitle %></div>
+          <div><%= post.content %></div>
         </div>
-        <%# ----------投稿者であれば削除できるようにする ------------%>
+        <%# ----------投稿者かつログインしていれば削除できるようにする ------------%>
         <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
       </li>
     <% end %>
-    <%= paginate posts %>
+    <%#= paginate posts %>
   </ul>
 <% end %>
