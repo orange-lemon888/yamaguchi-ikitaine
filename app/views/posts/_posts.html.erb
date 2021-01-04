@@ -1,24 +1,48 @@
 <%# ログインしていなくても投稿一覧表示可 %>
-<% if posts.any? %>
-  <ul class="list-unstyled">
-    <% Post.where(category: category[0]).each do |post| %>
-      <li class="media mb-3">
-        <div class="media-body">
-          <div>
-            <%= link_to post.title, post_path(post) %> <span class="text-muted"><%= post.area %><%= post.created_at %><%= '💛行きたいね' %><%= '件' %></span>
+<%# if Post.where(category: category[0]).any? %>
+  <div class="container">
+    <ul class="list-unstyled">
+      <% Post.where(category: category[0]).each do |post| %>
+        <li class="media mt-3 mb-3">
+          <div class="media-body">
+            <div class="row">
+              <div class="col-6">
+                <div>
+                  <%= link_to post.title, post_path(post) %>
+                  <span class="text-muted"><%= post.area %><%= post.created_at %></span>
+                  <span class="badge badge-warning">行きたいね <%= post.favorites.count %> 件</span>
+                </div>
+                <% if post.image? %>
+                  <%= image_tag post.image.url, width: "250px" %>
+                <% end %>
+                <%#= post.user %>
+                <div><%= post.subtitle %></div>
+              </div>
+              <div class="col-6">
+                <div><%= post.content %></div>
+              </div>
+            </div>
           </div>
-        <%#-----画像を入れる -----%>
-          <% if post.image? %>
-            <%= image_tag post.image.url, width: "250px" %>
+         
+          <%# --------ログイン中のみ可-------%>
+          <% if logged_in? %>
+            <%# --------行きたいねボタン-------%>
+            <%= render 'favorites/favorite_button', post: post %>
+          
+          <%# ----------投稿者のみ編集/削除可 ------------%>
+            <% if current_user == post.user %>
+              <%= link_to edit_post_path(post), class: 'btn btn-success btn-sm'  do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+              <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
+            <% end %>
           <% end %>
-          <%#= post.user %>      
-          <div><%= post.subtitle %></div>
-          <div><%= post.content %></div>
-        </div>
-        <%# ----------投稿者かつログインしていれば削除できるようにする ------------%>
-        <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </li>
-    <% end %>
-    <%#= paginate posts %>
-  </ul>
-<% end %>
+        </li>
+        <div class="border-bottom" ></div> <!--下ボーダー -->
+      <% end %>
+      <%#= paginate posts %>
+    </ul>
+  </div>
+<%# end %>

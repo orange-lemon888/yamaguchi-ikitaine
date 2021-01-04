@@ -10,25 +10,36 @@
 
       <P>
         <span class="badge badge-warning">投稿者</span><%= @post.user.name %> 
-        <span class="badge badge-warning">ｴﾘｱ</span><%= @post.area %> 
+        <span class="badge badge-warning">エリア</span><%= @post.area %> 
         <span class="badge badge-warning">投稿日</span><%= @post.created_at %>
       </P>
-　　
+      
       <p><span class="badge badge-warning">ポイント</span><%= @post.subtitle %></p>
     </div>
     
     <div class="col-md-6">
-      <div class="col-md-6">💛行きたいね　件
-      
+      <div class="row" >
+        <% if logged_in? %>
+          <%= render 'favorites/favorite_button', post: @post %>
+        <% end %>
+        
+        <span><%= '行きたいね ' %><%= @post.favorites.count %><%= '件' %></span>
+        
         <% if logged_in? %>
           <% if current_user == @post.user %>
-            <%= link_to '編集', edit_post_path(@post) %>
-            <%= link_to '削除', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to edit_post_path(@post), class: 'btn btn-success btn-sm'  do %>
+              <i class="fas fa-edit"></i>
+            <% end %>
+            <%= link_to @post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
           <% end %>
         <% end %>
       </div>
+        
       <span class="badge badge-success">投稿内容</span>
       <p><%= @post.content %></p>
     </div>
   </div>
 </div>
+<%#= link_to 'Back', posts_path %>

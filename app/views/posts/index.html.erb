@@ -1,3 +1,4 @@
+<%#---------------- メイン画像表示 ------------------%>
 <div class="jumbotron" style="background:url(/IMG_0003.JPG); background-size:cover;">
   <div class="container-fluid">
     <h1 style="color: #ffffff;">やまぐちの行きたいねを見つけよう!!</h1>
@@ -5,6 +6,7 @@
   </div>
 </div>
 
+<%#---------------- カテゴリー別タブ表示 --------------%>
 <div class="col-sm-12">
   <ul class="nav nav-tabs nav-justified mb-3 nav-pills">
     <% @categories.each do |category| %>
@@ -23,66 +25,14 @@
   <% @categories.each do |category| %>
     <% if category[0] == 0 %>
       <div id="category_<%= category[0]%>" class="tab-pane active" >
-        <%#= render 'posts', posts: @posts %>
         <% if Post.where(category: category[0]).any? %>
-          <ul class="list-unstyled">
-            <% Post.where(category: category[0]).each do |post| %>
-              <li class="media mb-3">
-                <div class="media-body">
-                  <div>
-                    <%= link_to post.title, post_path(post) %> <span class="text-muted"><%= post.area %><%= post.created_at %><%= '💛行きたいね' %><%= '件' %></span>
-                  </div>
-                <%#-----画像を入れる -----%>
-                  <% if post.image? %>
-                    <%= image_tag post.image.url, width: "250px" %>
-                  <% end %>
-                  <%#= post.user %>      
-                  <div><%= post.subtitle %></div>
-                  <div><%= post.content %></div>
-                </div>
-                <%# ----------投稿者かつログインしていれば削除できる ------------%>
-                <% if logged_in? %>
-                  <% if current_user == post.user %>
-                    <%= link_to '編集', edit_post_path(post), class: 'btn btn-success btn-sm' %>
-                    <%= link_to '削除', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-                  <% end %>  
-        　　　　　　<% end %>
-              </li>
-            <% end %>
-            <%#= paginate posts %>
-          </ul>
+          <%= render 'posts', category: category %>
         <% end %>
       </div>
     <% else %>
       <div id="category_<%= category[0]%>" class="tab-pane" >
-        <%#= render 'posts', posts: @posts %>
         <% if Post.where(category: category[0]).any? %>
-          <ul class="list-unstyled">
-            <% Post.where(category: category[0]).each do |post| %>
-              <li class="media mb-3">
-                <div class="media-body">
-                  <div>
-                    <%= link_to post.title, post_path(post) %> <span class="text-muted"><%= post.area %><%= post.created_at %><%= '💛行きたいね' %><%= '件' %></span>
-                  </div>
-                <%#-----画像を入れる -----%>
-                  <% if post.image? %>
-                    <%= image_tag post.image.url, width: "250px" %>
-                  <% end %>
-                  <%#= post.user %>      
-                  <div><%= post.subtitle %></div>
-                  <div><%= post.content %></div>
-                </div>
-                <%# ----------投稿者かつログインしていれば削除できる ------------%>
-                <% if logged_in? %>
-                  <% if current_user == post.user %>
-                    <%= link_to '編集', edit_post_path(post), class: 'btn btn-success btn-sm' %>
-                    <%= link_to '削除', post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
-                  <% end %>
-                <% end %>
-              </li>
-            <% end %>
-            <%#= paginate posts %>
-          </ul>
+          <%= render 'posts', category: category %>
         <% end %>
       </div>
     <% end %>

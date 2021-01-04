@@ -14,7 +14,7 @@
             <ul class="dropdown-menu dropdown-menu-right">
               <li class="dropdown-item"><%= link_to '投稿記事一覧', user_path(current_user) %></li>
               <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to '💛行きたいね', post_path(current_user) %></li>
+              <li class="dropdown-item"><%= link_to '💛行きたいね', ikitais_user_path(current_user) %></li>
               <li class="dropdown-divider"></li>
               <li class="dropdown-item"><%= link_to 'ログアウト', logout_path, method: :delete %></li>
             </ul>

@@ -1,0 +1,16 @@
+<%# -----既に行きたいねの投稿かどうか----- %>
+  <% if current_user.ikitai?(post) %> 
+    <%= form_with(model: current_user.favorites.find_by(post_id: post.id), local: true, method: :delete) do |f| %>
+      <%= hidden_field_tag :post_id, post.id %>
+      <%= f.button :type => "submit", style: 'border-style: none;' do %>
+        <i class="fas fa-heart like-btn" ></i>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
+      <%= hidden_field_tag :post_id, post.id %>
+      <%= f.button :type => "submit", style: 'border-style: none;' do %>
+        <i class="far fa-heart unlike-btn" ></i>
+      <% end %>
+    <% end %>
+  <% end %>

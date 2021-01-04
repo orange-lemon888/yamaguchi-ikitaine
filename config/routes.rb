@@ -6,8 +6,13 @@ Rails.application.routes.draw do
   delete 'logout', to: 'sessions#destroy'
   
   get 'signup', to: 'users#new'
-  resources :users, only: [:show, :new, :create]
+  resources :users, only: [:show, :new, :create] do
+    member do
+      get :ikitais
+    end
+  end
   resources :posts
+  resources :favorites, only: [:create, :destroy]
   #------------12/25-------------------
   #get 'posts/eat', to: 'posts#eat'
   #get 'posts/stay', to: 'posts#stay'

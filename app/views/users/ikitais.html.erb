@@ -1,0 +1,15 @@
+<ul class="nav nav-tabs nav-justified mb-3 nav-pills">
+  <li class="nav-item">
+    <a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">投稿記事一覧<span class="badge badge-secondary"></span></a>
+  </li>
+  <li class="nav-item">
+    <a href="<%= ikitais_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(ikitais_user_path(@user)) %>">💛行きたいね<span class="badge badge-secondary"></span></a>
+  </li>
+</ul>
+
+<%# -----行きたいね一覧 ----- %>
+<div id="ikitai-list" class="tab-pane active">
+  <% if @ikitais.any? %>
+    <%= render 'users_posts', posts: @ikitais %>
+  <% end %>
+</div>
