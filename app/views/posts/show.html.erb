@@ -19,22 +19,26 @@
     
     <div class="col-md-6">
       <div class="row" >
-        <% if logged_in? %>
-          <%= render 'favorites/favorite_button', post: @post %>
-        <% end %>
+        <div class="col-md-4">     
+          <% if logged_in? %>
+            <span class="row">
+              <%= render 'favorites/favorite_button', post: @post %><%= '行きたいね ' %><%= @post.favorites.count %><%= '件' %>
+            </span>
+          <% end %>
+        </div>
         
-        <span><%= '行きたいね ' %><%= @post.favorites.count %><%= '件' %></span>
-        
-        <% if logged_in? %>
-          <% if current_user == @post.user %>
-            <%= link_to edit_post_path(@post), class: 'btn btn-success btn-sm'  do %>
-              <i class="fas fa-edit"></i>
-            <% end %>
-            <%= link_to @post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' do %>
-              <i class="fas fa-trash-alt"></i>
+        <div class="offset-md-4 col-md-4">
+          <% if logged_in? %>
+            <% if current_user == @post.user %>
+              <%= link_to edit_post_path(@post), class: 'btn btn-success btn-sm'  do %>
+                <i class="fas fa-edit"></i>
+              <% end %>
+              <%= link_to @post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
         
       <span class="badge badge-success">投稿内容</span>
