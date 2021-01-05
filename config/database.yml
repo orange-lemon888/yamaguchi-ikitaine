@@ -9,18 +9,14 @@
 # And be sure to use new-style password hashing:
 #   https://dev.mysql.com/doc/refman/5.7/en/password-hashing.html
 #
-default: &default
-  adapter: mysql2
-  encoding: utf8
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password:
-  socket: /var/lib/mysql/mysql.sock
-
-development:
-  <<: *default
-  database: ikitaine_development
-
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: ikitaine_production
+  username: yamaguchi-ikitaine
+  password: <%= ENV['IKITAINE_DATABASE_PASSWORD'] %>
+  
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
