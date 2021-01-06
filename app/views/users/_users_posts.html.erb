@@ -1,7 +1,7 @@
 <div class="container">
   <ul class="list-unstyled">
     <% posts.each do |post| %>
-      <li class="media mb-3">
+      <li class="media mb-3 pb-3 border-bottom">
         <div class="media-body">
           <div class="row">
             <div class="col-6">
@@ -11,7 +11,7 @@
                 <span class="badge badge-warning">行きたいね <%= post.favorites.count %> 件</span>
               </div>
               <% if post.image? %>
-                <%= image_tag post.image.url, width: "250px" %>
+                <%= image_tag post.image.url, width: "250", alt: "post image" %>
               <% end %>
               <div><%= post.subtitle %></div>
               <%#<div>投稿者<%= post.user.name %><%#</div> %>
@@ -38,7 +38,6 @@
           <% end %>
         <% end %>
       </li>
-      <div class="border-bottom" ></div> <!--下ボーダー -->
     <% end %>
     <%#= paginate posts %>
   </ul>

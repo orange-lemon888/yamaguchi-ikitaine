@@ -3,7 +3,7 @@
   <div class="container">
     <ul class="list-unstyled">
       <% Post.where(category: category[0]).each do |post| %>
-        <li class="media mt-3 mb-3">
+        <li class="media mt-3 pb-3 border-bottom">
           <div class="media-body">
             <div class="row">
               <div class="col-6">
@@ -13,7 +13,7 @@
                   <span class="badge badge-warning">行きたいね <%= post.favorites.count %> 件</span>
                 </div>
                 <% if post.image? %>
-                  <%= image_tag post.image.url, width: "250px" %>
+                  <%= image_tag post.image.url, width: "250", alt: "post image" %>
                 <% end %>
                 <%#= post.user %>
                 <div><%= post.subtitle %></div>
@@ -31,7 +31,7 @@
           
           <%# ----------投稿者のみ編集/削除可 ------------%>
             <% if current_user == post.user %>
-              <%= link_to edit_post_path(post), class: 'btn btn-success btn-sm'  do %>
+              <%= link_to edit_post_path(post), class: 'btn btn-success btn-sm' do %>
                 <i class="fas fa-edit"></i>
               <% end %>
               <%= link_to post, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' do %>
@@ -40,7 +40,6 @@
             <% end %>
           <% end %>
         </li>
-        <div class="border-bottom" ></div> <!--下ボーダー -->
       <% end %>
       <%#= paginate posts %>
     </ul>

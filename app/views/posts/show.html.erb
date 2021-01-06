@@ -5,7 +5,7 @@
       <p><%= @post.title %></p>
 
       <% if @post.image? %>
-        <%= image_tag @post.image.url,  size: '480x320' %>
+        <%= image_tag @post.image.url, size: "480x320", alt: "post image" %>
       <% end %>
 
       <P>
@@ -21,9 +21,9 @@
       <div class="row" >
         <div class="col-md-4">     
           <% if logged_in? %>
-            <span class="row">
+            <div class="row">
               <%= render 'favorites/favorite_button', post: @post %><%= '行きたいね ' %><%= @post.favorites.count %><%= '件' %>
-            </span>
+            </div>
           <% end %>
         </div>
         
