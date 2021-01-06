@@ -5,7 +5,7 @@
       <p><%= @post.title %></p>
 
       <% if @post.image? %>
-        <%= image_tag @post.image.url, size: "480x320", alt: "post image" %>
+        <%= image_tag @post.image.url, id: "pic", size: "480x320", alt: "post image" %>
       <% end %>
 
       <P>
