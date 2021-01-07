@@ -65,7 +65,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'kaminari'
 
 #アップローダの実装用
-gem 'carrierwave'
+gem 'carrierwave', '~> 1.3', '>= 1.3.1'
+gem 'cloudinary'
 
 #デバッグ用
 gem 'pry-byebug', group: :development
