@@ -12,7 +12,6 @@
     </div>
   </div>
 </div>
-
 <%#---------------- カテゴリー別タブ表示 --------------%>
 <div class="col-sm-12">
   <ul class="nav nav-tabs nav-justified mb-3 nav-pills">
@@ -27,19 +26,20 @@
     <% end %>
   </ul>
 </div>
+
 <%#---------------- 投稿記事一覧表示 ------------------%>
 <div class="tab-content">
   <% @categories.each do |category| %>
     <% if category[0] == 0 %>
       <div id="category_<%= category[0]%>" class="tab-pane active" >
-        <% if Post.where(category: category[0]).any? %>
-          <%= render 'posts', category: category %>
+        <% if @posts.where(category: category).any? %>
+          <%= render 'search_posts', category: category %>
         <% end %>
       </div>
     <% else %>
       <div id="category_<%= category[0]%>" class="tab-pane" >
-        <% if Post.where(category: category[0]).any? %>
-          <%= render 'posts', category: category %>
+        <% if @posts.where(category: category).any? %>
+          <%= render 'search_posts', category: category %>
         <% end %>
       </div>
     <% end %>

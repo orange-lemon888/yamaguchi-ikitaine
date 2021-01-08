@@ -12,9 +12,9 @@ class PostsController < ApplicationController
       [1, "食べる"],
       [2, "泊まる"]
     ]
-    @posts = Post.order(id: :desc).page(params[:page]).per(10)
+    #@posts = Post.order(id: :desc).page(params[:page]).per(10)
     #@plays = Post.where(category: "0")   #見る／遊ぶ
-    #@posts = Post.where(category: "0")   #見る／遊ぶ
+    @posts = Post.where(category: "0")   #見る／遊ぶ
   end
 
   # GET /posts/1
@@ -79,17 +79,17 @@ class PostsController < ApplicationController
     end
   end
   
-  #def eat   #食べる投稿一覧
-    #@user = current_user
+  def eat   #食べる投稿一覧
+    @user = current_user
     #@eats = Post.where(category: "1")
-    #@posts = Post.where(category: "1") 
-  #end
+    @posts = Post.where(category: "1") 
+  end
   
-  #def stay  #泊まる投稿一覧
-    #@user = current_user
+  def stay  #泊まる投稿一覧
+    @user = current_user
     #@stays = Post.where(category: "2")
-    #@posts = Post.where(category: "2") 
-  #end
+    @posts = Post.where(category: "2") 
+  end
   #0108追加------------------------------------------------------
   def search
     @user = current_user
@@ -99,13 +99,20 @@ class PostsController < ApplicationController
       [2, "泊まる"]
     ]
     #値が入っているか？
+    #if params[:title].present?
+    #  @posts = Post.where('title like ?', "%#{params[:title]}%").order(id: :desc).page(params[:page]).per(10)
+    #else
+    #  @posts = Post.none
+    #end
     if params[:keyword].present?
-      #@posts = Post.where('title like ?', "%#{params[:keyword]}%").order(id: :desc).page(params[:page]).per(10)
-      @posts = Post.where(["title like? OR area like? OR subtitle like? OR content like?", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%", "%#{params[:keyword]}%"]).order(id: :desc).page(params[:page]).per(10)
+      @posts = Post.where('title like ?', "%#{params[:keyword]}%").order(id: :desc).page(params[:page]).per(10)
     else
       @posts = Post.none
     end
     @keyword = params[:keyword]
+     #@posts = Post.search(params[:keyword])
+     #@keyword = params[:keyword]
+     #render "index"
   end
 
   private

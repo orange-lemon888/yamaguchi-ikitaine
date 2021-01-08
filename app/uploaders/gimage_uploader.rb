@@ -45,13 +45,13 @@ class GimageUploader < CarrierWave::Uploader::Base
   end
 
 #日付で保存
- #def filename
-  #  if original_filename.present?
-  #   time = Time.now
-  #   name = time.strftime('%Y%m%d%H%M%S') + '.jpg'
-  #   name.downcase
-  #  end
-#end
+  def filename
+    if original_filename.present?
+     time = Time.now
+     name = time.strftime('%Y%m%d%H%M%S') + '.jpg'
+     name.downcase
+    end
+  end
   #----------------------ここまで-------------------
   #------------------------------------------------------↑0107
   # def scale(width, height)

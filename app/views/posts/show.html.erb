@@ -22,7 +22,8 @@
         <div class="col-md-4">     
           <% if logged_in? %>
             <div class="row">
-              <%= render 'favorites/favorite_button', post: @post %><%= '行きたいね ' %><%= @post.favorites.count %><%= '件' %>
+              <%= render 'favorites/favorite_button', post: @post %>
+              <span class="badge badge-warning mt-2 mb-2">行きたいね <%= @post.favorites.count %> 件</span>
             </div>
           <% end %>
         </div>
@@ -46,4 +47,7 @@
     </div>
   </div>
 </div>
-<%#= link_to 'Back', posts_path %>
+
+<%= link_to :back do %>
+  <button class="badge badge-success">戻る</button>
+<% end %>

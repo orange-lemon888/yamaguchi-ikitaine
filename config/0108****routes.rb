@@ -17,6 +17,6 @@ Rails.application.routes.draw do
   #------------0108追加----------------
   get 'search' => 'posts#search'
   #------------12/25-------------------
-  #get 'posts/eat', to: 'posts#eat'
-  #get 'posts/stay', to: 'posts#stay'
+  get 'posts/eat', to: 'posts#eat'
+  get 'posts/stay', to: 'posts#stay'
 end

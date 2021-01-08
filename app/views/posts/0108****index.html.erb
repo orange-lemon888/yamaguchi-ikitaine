@@ -16,32 +16,24 @@
 <%#---------------- カテゴリー別タブ表示 --------------%>
 <div class="col-sm-12">
   <ul class="nav nav-tabs nav-justified mb-3 nav-pills">
-    <% @categories.each do |category| %>
-      <li class="nav-item">
-        <% if category[0] == 0 %>
-          <a href="#category_<%= category[0]%>" class="nav-link active" data-toggle="tab"><%= category[1] %></a>
-        <% else %>
-          <a href="#category_<%= category[0]%>" class="nav-link" data-toggle="tab"><%= category[1] %></a>
-        <% end %>
-      </li>
-    <% end %>
+    <li class="nav-item">
+      <a href="<%= 'posts' %>" class="nav-link <%= 'active' if current_page?('posts') %>" data-toggle="tab"><%= '見る／遊ぶ' %></a>
+    </li>
+    <li class="nav-item">
+      <a href="<%=posts_eat_path(@posts) %>" class="nav-link <%#= 'active' if current_page?(posts_eat_path(@posts))) %>" data-toggle="tab"><%= '食べる' %></a>
+    </li>
+    <li class="nav-item">
+      <a href="<%=posts_stay_path(@posts) %>" class="nav-link <%#= 'active' if current_page?(posts_stay_path(@posts)) %>" data-toggle="tab"><%= '泊まる' %></a>
+    </li>
   </ul>
 </div>
 <%#---------------- 投稿記事一覧表示 ------------------%>
 <div class="tab-content">
-  <% @categories.each do |category| %>
-    <% if category[0] == 0 %>
-      <div id="category_<%= category[0]%>" class="tab-pane active" >
-        <% if Post.where(category: category[0]).any? %>
-          <%= render 'posts', category: category %>
-        <% end %>
-      </div>
-    <% else %>
-      <div id="category_<%= category[0]%>" class="tab-pane" >
-        <% if Post.where(category: category[0]).any? %>
-          <%= render 'posts', category: category %>
-        <% end %>
-      </div>
+  <div id="category_0" class="tab-pane active" >
+    <% if Post.where(category: "0").any? %>
+      <%#= render 'posts', category: category %>
+      <% @category = "0" %>
+      <%= render 'posts', category: @posts %>
     <% end %>
-  <% end %>
+  </div>
 </div>
